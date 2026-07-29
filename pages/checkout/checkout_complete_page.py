@@ -1,5 +1,7 @@
 import allure
 from playwright.sync_api import Page
+
+from components.menu.menu_component import MenuComponent
 from elements.button import Button
 from elements.image import Image
 from elements.text import Text
@@ -9,6 +11,8 @@ from pages.base_page import BasePage
 class CheckoutCompletePage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
+
+        self.menu = MenuComponent(page)
 
         self.page_title = Text(page, "title", "Checkout Complete Page Title")
         self.pony_express_img = Image(page, "pony-express", "Pony Express image")
@@ -36,3 +40,7 @@ class CheckoutCompletePage(BasePage):
     @allure.step("Click back home button")
     def click_back_home(self):
         self.back_home_button.click()
+
+    @allure.step("Perform logout from complete page")
+    def logout(self):
+        self.menu.logout()

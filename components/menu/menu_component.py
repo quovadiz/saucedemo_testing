@@ -8,8 +8,9 @@ class MenuComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.burger_btn = Button(page, "react-burger-menu-btn", "Burger menu button")
-        self.logout_link = Button(page, "logout-sidebar-link", "Logout sidebar link")
+        self.burger_btn = Button(page, "#react-burger-menu-btn", "Burger menu button")
+        self.logout_link = Button(page, "[data-test='logout-sidebar-link']", "Logout link")
+
         self.all_items_link = Button(page, "inventory-sidebar-link", "All Items sidebar link")
         self.reset_link = Button(page, "reset-sidebar-link", "Reset App State sidebar link")
 

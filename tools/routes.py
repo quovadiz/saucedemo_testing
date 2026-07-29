@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class AppRoute(str, Enum):
+    BASE_URL = "."
     INVENTORY_URL = "./inventory.html"
     CART_URL = "./cart.html"
     CHECKOUT_STEP_ONE_URL = "./checkout-step-one.html"
