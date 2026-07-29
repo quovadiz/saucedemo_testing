@@ -4,6 +4,6 @@ from enum import Enum
 class AppRoute(str, Enum):
     INVENTORY_URL = "./inventory.html"
     CART_URL = "./cart.html"
-    DASHBOARD = "./#/dashboard"
-    COURSES = "./#/courses"
-    CREATE_COURSE = "./#/courses/create"
+    CHECKOUT_STEP_ONE_URL = "./checkout-step-one.html"
+    CHECKOUT_STEP_TWO_URL = "./checkout-step-two.html"
+    CHECKOUT_COMPLETE_URL = "./checkout-complete.html"
