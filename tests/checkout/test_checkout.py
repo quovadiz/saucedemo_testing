@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 from pages.cart.cart_page import CartPage
@@ -8,9 +9,14 @@ from pages.checkout.checkout_complete_page import CheckoutCompletePage
 from tools.routes import AppRoute
 
 
+@allure.epic("Checkout")
+@allure.feature("Order Placement & Session Management")
 @pytest.mark.regression
 @pytest.mark.checkout
 class TestCheckout:
+    @allure.story("Successful Order Placement")
+    @allure.title("Successfully complete order placement flow from catalog to completion")
+    @allure.severity(allure.severity_level.BLOCKER)
     def test_successful_order_placement(
         self,
         inventory_page: InventoryPage,
@@ -47,34 +53,34 @@ class TestCheckout:
         checkout_complete_page.check_current_url(AppRoute.CHECKOUT_COMPLETE_URL)
         checkout_complete_page.check_checkout_complete_success()
 
-    @pytest.mark.regression
-    @pytest.mark.checkout
-    class TestCheckout:
-        def test_logout_after_order_placement(
-                self,
-                inventory_page: InventoryPage,
-                cart_page: CartPage,
-                checkout_step_one_page: CheckoutStepOnePage,
-                checkout_step_two_page: CheckoutStepTwoPage,
-                checkout_complete_page: CheckoutCompletePage,
-        ):
-            inventory_page.visit(AppRoute.INVENTORY_URL)
-            inventory_page.check_current_url(AppRoute.INVENTORY_URL)
-            inventory_page.add_product_to_cart(index=0)
+    @allure.story("Logout After Order")
+    @allure.title("Perform logout after successful order placement and verify redirect to login")
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_logout_after_order_placement(
+            self,
+            inventory_page: InventoryPage,
+            cart_page: CartPage,
+            checkout_step_one_page: CheckoutStepOnePage,
+            checkout_step_two_page: CheckoutStepTwoPage,
+            checkout_complete_page: CheckoutCompletePage,
+    ):
+        inventory_page.visit(AppRoute.INVENTORY_URL)
+        inventory_page.check_current_url(AppRoute.INVENTORY_URL)
+        inventory_page.add_product_to_cart(index=0)
 
-            inventory_page.cart_button.click()
-            cart_page.check_current_url(AppRoute.CART_URL)
-            cart_page.checkout_btn.click()
-            cart_page.check_current_url(AppRoute.CHECKOUT_STEP_ONE_URL)
+        inventory_page.cart_button.click()
+        cart_page.check_current_url(AppRoute.CART_URL)
+        cart_page.checkout_btn.click()
+        cart_page.check_current_url(AppRoute.CHECKOUT_STEP_ONE_URL)
 
-            checkout_step_one_page.fill_form_and_continue(
-                first_name="Denis", last_name="Automation", postal_code="12345"
-            )
-            checkout_step_one_page.check_current_url(AppRoute.CHECKOUT_STEP_TWO_URL)
+        checkout_step_one_page.fill_form_and_continue(
+            first_name="Denis", last_name="Automation", postal_code="12345"
+        )
+        checkout_step_one_page.check_current_url(AppRoute.CHECKOUT_STEP_TWO_URL)
 
-            checkout_step_two_page.click_finish()
-            checkout_complete_page.check_current_url(AppRoute.CHECKOUT_COMPLETE_URL)
-            checkout_complete_page.check_checkout_complete_success()
+        checkout_step_two_page.click_finish()
+        checkout_complete_page.check_current_url(AppRoute.CHECKOUT_COMPLETE_URL)
+        checkout_complete_page.check_checkout_complete_success()
 
-            checkout_complete_page.logout()
-            checkout_complete_page.check_current_url(AppRoute.BASE_URL)
+        checkout_complete_page.logout()
+        checkout_complete_page.check_current_url(AppRoute.BASE_URL)
