@@ -25,7 +25,7 @@ class TestInventory:
 
         inventory_page.check_cart_badge_count("3")
 
-    def test_remove_product_from_cart(self, inventory_page: InventoryPage):
+    def test_remove_product_from_catalog(self, inventory_page: InventoryPage):
         inventory_page.visit(AppRoute.INVENTORY_URL)
         inventory_page.check_current_url(AppRoute.INVENTORY_URL)
 

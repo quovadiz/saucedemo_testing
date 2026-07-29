@@ -13,7 +13,6 @@ class TestCart:
         inventory_page.visit(AppRoute.INVENTORY_URL)
         inventory_page.check_current_url(AppRoute.INVENTORY_URL)
 
-        # Переходим в корзину через кнопку в шапке каталога
         inventory_page.cart_button.click()
         cart_page.check_current_url(AppRoute.CART_URL)
 
@@ -21,17 +20,14 @@ class TestCart:
         inventory_page.visit(AppRoute.INVENTORY_URL)
         inventory_page.check_current_url(AppRoute.INVENTORY_URL)
 
-        # Считываем данные товара из каталога перед добавлением
         title = inventory_page.product_card.title.get_locator(0).inner_text()
         price = inventory_page.product_card.price.get_locator(0).inner_text()
         description = inventory_page.product_card.description.get_locator(0).inner_text()
 
-        # Добавляем товар в корзину и переходим в нее
         inventory_page.add_product_to_cart(index=0)
         inventory_page.cart_button.click()
         cart_page.check_current_url(AppRoute.CART_URL)
 
-        # Проверяем состав и детали товара в корзине через компонент CartItemComponent
         cart_page.cart_item.check_visible(
             index=0,
             quantity="1",
@@ -44,22 +40,17 @@ class TestCart:
         inventory_page.visit(AppRoute.INVENTORY_URL)
         inventory_page.check_current_url(AppRoute.INVENTORY_URL)
 
-        # Добавляем товар и переходим в корзину
         inventory_page.add_product_to_cart(index=0)
         inventory_page.cart_button.click()
         cart_page.check_current_url(AppRoute.CART_URL)
 
-        # Удаляем товар прямо из корзины
-        cart_page.cart_item.remove_from_cart(index=0)
+        cart_page.remove_product(index=0)
 
-        # Проверяем, что товар больше не отображается в корзине
-        expect(cart_page.cart_item.title.get_locator(0)).not_to_be_visible()
+        cart_page.check_cart_item_is_absent(index=0)
 
     def test_return_to_catalog(self, cart_page: CartPage):
-        # Открываем страницу корзины напрямую
         cart_page.visit(AppRoute.CART_URL)
         cart_page.check_current_url(AppRoute.CART_URL)
 
-        # Возвращаемся к каталогу кнопкой продолжения покупок
         cart_page.continue_shopping_btn.click()
         cart_page.check_current_url(AppRoute.INVENTORY_URL)

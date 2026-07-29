@@ -34,3 +34,7 @@ class CartPage(BasePage):
     @allure.step("Check cart item at index '{index}' visibility and data")
     def check_cart_item(self, index: int, quantity: str, title: str, price: str, description: str):
         self.cart_item.check_visible(index=index, quantity=quantity, title=title, price=price, description=description)
+
+    @allure.step("Check that cart item at index '{index}' is absent")
+    def check_cart_item_is_absent(self, index: int = 0):
+        self.cart_item.check_item_is_not_visible(index=index)

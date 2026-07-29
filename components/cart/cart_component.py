@@ -31,6 +31,10 @@ class CartItemComponent(BaseComponent):
 
         self.remove_btn.check_visible(nth=index)
 
+    @allure.step("Check cart item at index '{index}' is not visible")
+    def check_item_is_not_visible(self, index: int = 0):
+        self.title.check_hidden(nth=index)
+
     @allure.step("Remove product from cart at index '{index}'")
     def remove_from_cart(self, index: int = 0):
         self.remove_btn.check_visible(nth=index)
