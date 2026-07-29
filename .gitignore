@@ -1,0 +1,46 @@
+# Python (Кэш и байт-код)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Виртуальные окружения (Virtual Environments)
+.venv/
+venv/
+env/
+ENV/
+bin/
+lib/
+include/
+
+# Статичные файлы
+videos/
+tracing/
+
+# Jupyter Notebook (Контрольные точки и временные файлы)
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*.ipynb_checkpoints/
+
+# Настройки популярных IDE (VS Code, PyCharm)
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Логи и базы данных (если применимо)
+*.log
+*.sqlite3
+
+# Файлы операционных систем (Mac / Windows мусор)
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+
+# Файлы конфигурации с секретами (если используешь python-dotenv)
+# .env
+
+# Allure
+allure-results
+allure-report
